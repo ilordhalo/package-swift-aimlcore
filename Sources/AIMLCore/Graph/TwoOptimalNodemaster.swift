@@ -35,7 +35,7 @@ class TwoOptimalNodemaster: Nodemaster {
     
     var hidden: [String : Any]!
     
-    var keys: Dictionary<String, Any>.Keys {
+    var keys: [String] {
         if size < 3 {
             var result = [String: Any]()
             if key_0 != nil {
@@ -44,9 +44,9 @@ class TwoOptimalNodemaster: Nodemaster {
             if key_1 != nil {
                 result[key_1!] = value_1
             }
-            return result.keys
+            return Array(result.keys)
         }
-        return hidden.keys
+        return Array(hidden.keys)
     }
     
     var averageSize: Double {

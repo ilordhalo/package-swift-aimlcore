@@ -29,7 +29,8 @@ class PredicateMaster {
             // 文件不存在、新建文件
             _ = FileUtil.createFile(fileURL: fileURL)
             let dict = NSDictionary()
-            _ = try? dict.write(to: URL(fileURLWithPath: fileURL))
+            //_ = try? dict.write(to: URL(fileURLWithPath: fileURL))
+            dict.write(toFile: fileURL, atomically: true)
             return
         }
         predicateDict = nsdict.toDictionary()
@@ -37,7 +38,8 @@ class PredicateMaster {
     
     func writeToFile() {
         let nsdict = predicateDict.toNSDictionary()
-        _ = try? nsdict.write(to: URL(fileURLWithPath: fileURL))
+        //_ = try? nsdict.write(to: URL(fileURLWithPath: fileURL))
+        nsdict.write(toFile: fileURL, atomically: true)
     }
     
     func setPredicate(key: String, value: String) {

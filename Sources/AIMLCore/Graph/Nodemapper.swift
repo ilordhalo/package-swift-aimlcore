@@ -14,7 +14,7 @@ import Foundation
 protocol Nodemapper {
     subscript(key: Dictionary<String, Any>.Key) -> Any? {get set}
     func remove(value: Any)
-    var keys: Dictionary<String, Any>.Keys {get}
+    var keys: [String] {get}
     func contains(key: Dictionary<String, Any>.Key) -> Bool
     var size: Int {get}
     var parent: Nodemapper? {get set}
