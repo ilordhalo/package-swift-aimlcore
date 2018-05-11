@@ -18,7 +18,7 @@ public class Core {
     /// pattern字典树
     var graphMaster = GraphMaster()
     /// aiml处理器
-    var aimlProcessor: AIMLProcessor!
+    public var aimlProcessor: AIMLProcessor!
     /// 上次匹配结果
     var lastMatch: Match?
     

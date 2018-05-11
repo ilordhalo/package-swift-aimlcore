@@ -14,7 +14,7 @@ import Foundation
     该类自带aiml的部分元素处理类
     用户还可以自定aiml元素的处理类，并添加进来
 */
-class AIMLProcessor {
+public class AIMLProcessor {
     /// [elementName: className]
     private var delegates: [String: String]
     
@@ -41,7 +41,7 @@ class AIMLProcessor {
     /**
         处理aiml内容
     */
-    func process(xml: String, core: Core) -> String {
+    public func process(xml: String, core: Core) -> String {
         guard let data = XMLKit.appendXMLTag(xml: xml).data(using: .utf8) else {
             fatalError("xml cant convert to data")
         }
