@@ -95,7 +95,8 @@ class GraphMaster {
         }
         
         inputPath.append(StaticString.THAT)
-        if that.count > 0 {
+        // that内容过多时，不考虑that
+        if that.count > 0 && that.count < 50 {
             inputPath += StringKit.wordSplit(str: that)
         }
         else {
@@ -110,7 +111,8 @@ class GraphMaster {
             inputPath.append(StaticString.ASTERISK)
         }
         
-        let matchResult = match(nodemapper: roots[_intent]!, parent: roots[_intent]!, input: inputPath, wildcardContent: StaticString.EMPTY_STRING, path: StaticString.EMPTY_STRING, matchState: .IN_INPUT, expiration: 0)
+        let now = Date().timeIntervalSince1970
+        let matchResult = match(nodemapper: roots[_intent]!, parent: roots[_intent]!, input: inputPath, wildcardContent: StaticString.EMPTY_STRING, path: StaticString.EMPTY_STRING, matchState: .IN_INPUT, expiration: now)
         return matchResult
     }
     
@@ -124,6 +126,11 @@ class GraphMaster {
         expiration：匹配耗时
     */
     private func match(nodemapper: Nodemapper, parent: Nodemapper, input: [String], wildcardContent: String, path: String, matchState: MatchState, expiration: Double) -> Match? {
+        let now = Date().timeIntervalSince1970
+        // 匹配时间超过一秒，判定为无匹配结果
+        if now - expiration > 1 {
+            return nil
+        }
         
         // 剪枝优化
         if input.count < nodemapper.height() {
